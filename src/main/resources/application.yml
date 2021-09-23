@@ -1,0 +1,14 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: none
+  datasource:
+    password: root123
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=poc
+    username: postgres
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port : 8081
