@@ -1,7 +1,7 @@
 package com.alm.excelops.controller;
 
-import com.alm.excelops.model.AgentModel;
-import com.alm.excelops.service.AgentService;
+import com.alm.excelops.model.StudentModel;
+import com.alm.excelops.service.StudentService;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,16 +14,16 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-public class AgentController {
+public class StudentController {
 
     @Autowired
-    AgentService agentService;
+    StudentService studentService;
 
     @PostMapping("/save-agent-details")
     public ResponseEntity<Object> saveAgentDetails(@RequestParam("file") MultipartFile excelFile) throws IOException {
 
         XSSFWorkbook workbook = new XSSFWorkbook(excelFile.getInputStream());
-        List<AgentModel> agents  = agentService.saveAgentDetails(workbook);
+        List<StudentModel> agents  = studentService.saveStudentDetails(workbook);
         return new ResponseEntity<Object>(agents, HttpStatus.OK);
     }
 
@@ -31,7 +31,7 @@ public class AgentController {
     public ResponseEntity<Object> mandatoryFieldCheckInExcel(@RequestParam("file") MultipartFile excelFile) throws IOException {
 
         XSSFWorkbook workbook = new XSSFWorkbook(excelFile.getInputStream());
-        agentService.mandatoryFieldCheckInExcel(workbook);
+        studentService.mandatoryFieldCheckInExcel(workbook);
         return new ResponseEntity<Object>("ok", HttpStatus.OK);
     }
 }

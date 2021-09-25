@@ -1,7 +1,7 @@
 package com.alm.excelops.service;
 
-import com.alm.excelops.model.AgentModel;
-import com.alm.excelops.repository.AgentDAO;
+import com.alm.excelops.model.StudentModel;
+import com.alm.excelops.repository.StudentDAO;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -17,15 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AgentServiceImpl implements AgentService {
+public class StudentServiceImpl implements StudentService {
 
     @Autowired
-    AgentDAO agentDAO;
+    StudentDAO agentDAO;
 
     @Override
-    public List<AgentModel> saveAgentDetails(XSSFWorkbook workbook) {
-        List<AgentModel> agentModelList = new ArrayList<>();
-        //Get first/desired sheet from the workbook
+    public List<StudentModel> saveStudentDetails(XSSFWorkbook workbook) {
+        List<StudentModel> studentModelList = new ArrayList<>();
         XSSFSheet sheet = workbook.getSheetAt(0);
         XSSFRow row;
         XSSFCell cell;
@@ -33,32 +32,25 @@ public class AgentServiceImpl implements AgentService {
             row = sheet.getRow(p);
 
             if (!isRowEmpty(row)) {
-                AgentModel agentModel = new AgentModel();
+                StudentModel studentModel = new StudentModel();
                 for (int i = 0; i < row.getLastCellNum(); i++) {
                     cell = row.getCell(i);
                     cell.setCellType(CellType.STRING);
                     if (cell.getColumnIndex() == 0)
-                        agentModel.setRow(cell.getStringCellValue());
+                        studentModel.setName(cell.getStringCellValue());
                     if (cell.getColumnIndex() == 1)
-                        agentModel.setLegalFirstName(cell.getStringCellValue());
+                        studentModel.setCity(cell.getStringCellValue());
                     else if (cell.getColumnIndex() == 2)
-                        agentModel.setLegalLastName(cell.getStringCellValue());
+                        studentModel.setState(cell.getStringCellValue());
                     else if (cell.getColumnIndex() == 3)
-                        agentModel.setLegalMiddleName(cell.getStringCellValue());
-                    else if (cell.getColumnIndex() == 4)
-                        agentModel.setPinCode(cell.getStringCellValue());
-                    else if (cell.getColumnIndex() == 5)
-                        agentModel.setCity(cell.getStringCellValue());
-                    else if (cell.getColumnIndex() == 6)
-                        agentModel.setState(cell.getStringCellValue());
-
+                        studentModel.setPinCode(cell.getStringCellValue());
                 }
-                agentModelList.add(agentModel);
+                studentModelList.add(studentModel);
             }
 
         }
-        agentDAO.saveAgents(agentModelList);
-        return agentModelList;
+        agentDAO.saveStudents(studentModelList);
+        return studentModelList;
     }
 
     @Override

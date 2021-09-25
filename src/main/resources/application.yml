@@ -6,7 +6,7 @@ spring:
         ddl-auto: none
   datasource:
     password: root123
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=poc
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=project
     username: postgres
     driver-class-name: org.postgresql.Driver
 
