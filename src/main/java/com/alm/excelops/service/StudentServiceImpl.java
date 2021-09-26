@@ -20,7 +20,7 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
-    StudentDAO agentDAO;
+    StudentDAO studentDAO;
 
     @Override
     public List<StudentModel> saveStudentDetails(XSSFWorkbook workbook) {
@@ -49,13 +49,8 @@ public class StudentServiceImpl implements StudentService {
             }
 
         }
-        agentDAO.saveStudents(studentModelList);
+        studentDAO.saveStudents(studentModelList);
         return studentModelList;
-    }
-
-    @Override
-    public void mandatoryFieldCheckInExcel(XSSFWorkbook workbook) {
-
     }
 
     private static boolean isRowEmpty(Row row) {

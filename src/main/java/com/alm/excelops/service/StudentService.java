@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface StudentService {
     List<StudentModel> saveStudentDetails(XSSFWorkbook workbook);
-
-    void mandatoryFieldCheckInExcel(XSSFWorkbook workbook);
 }

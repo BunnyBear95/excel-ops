@@ -19,19 +19,11 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @PostMapping("/save-agent-details")
-    public ResponseEntity<Object> saveAgentDetails(@RequestParam("file") MultipartFile excelFile) throws IOException {
+    @PostMapping("/save-student-details")
+    public ResponseEntity<Object> saveStudentDetails(@RequestParam("file") MultipartFile excelFile) throws IOException {
 
         XSSFWorkbook workbook = new XSSFWorkbook(excelFile.getInputStream());
-        List<StudentModel> agents  = studentService.saveStudentDetails(workbook);
-        return new ResponseEntity<Object>(agents, HttpStatus.OK);
-    }
-
-    @PostMapping("/check-valid-excel")
-    public ResponseEntity<Object> mandatoryFieldCheckInExcel(@RequestParam("file") MultipartFile excelFile) throws IOException {
-
-        XSSFWorkbook workbook = new XSSFWorkbook(excelFile.getInputStream());
-        studentService.mandatoryFieldCheckInExcel(workbook);
-        return new ResponseEntity<Object>("ok", HttpStatus.OK);
+        List<StudentModel> studentModelList  = studentService.saveStudentDetails(workbook);
+        return new ResponseEntity<Object>(studentModelList, HttpStatus.OK);
     }
 }
